@@ -29,28 +29,20 @@
             <input type="text" class="form-control" placeholder="Search">
           </div>
         </div>
-        <div class="col-md-3">          
+        <div class="col-md-3">
           <b-dropdown id="dropdown-form" text="Dropdown test" ref="dropdown" class="m-2">
-            <input type="text" class="form-control" placeholder="Search">
-            <b-dropdown-form class="mem-dropdown">                                        
-              <b-form-checkbox class="mb-3">Select All Courses</b-form-checkbox>
-              <b-dropdown-header>
-                Custom
-              </b-dropdown-header>
-              <b-form-checkbox class="mb-3">Design</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Typo</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Motion</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Graphic</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Mobile</b-form-checkbox>
-              <b-dropdown-header>
-                Custom
-              </b-dropdown-header>
-              <b-form-checkbox class="mb-3">Design</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Typo</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Motion</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Graphic</b-form-checkbox>
-              <b-form-checkbox class="mb-3">Mobile</b-form-checkbox>
-            </b-dropdown-form>            
+            <input v-model="search" type="text" class="form-control" placeholder="Search">
+            <b-dropdown-form class="mem-dropdown">
+              <b-form-checkbox v-model="selectAll" class="mb-3">Select All Courses</b-form-checkbox>
+              <b-form-checkbox-group v-model="selection" v-for="(item, index) in dropdownItem" :key="index">
+                <b-dropdown-header>
+                  {{ item.label }}
+                </b-dropdown-header>
+                <b-form-checkbox v-for="(option, index) in item.value" :key="index" :value="option.value" class="mb-3">
+                  {{ option.label }}
+                </b-form-checkbox>
+              </b-form-checkbox-group>
+            </b-dropdown-form>
           </b-dropdown>
         </div>
         <div class="col-md-3">
@@ -95,6 +87,31 @@ export default {
         linkedCalendars: false,
       },
       format: 'MMMM DD, YYYY',
+      search: '',
+      selection: [],
+      selectAll: false,
+      dropdownItem: [
+        {
+          label: 'custom',
+          value: [
+            {label: 'design', value: 'design'},
+            {label: 'Typo', value: 'Typo'},
+            {label: 'Motion', value: 'Motion'},
+            {label: 'Graphic', value: 'Graphic'},
+            {label: 'Mobile', value: 'Mobile'},
+          ]
+        },
+        {
+          label: 'custom 2',
+          value: [
+            {label: 'Samsung', value: 'Samsung'},
+            {label: 'Iphone', value: 'Iphone'},
+            {label: 'Nokia', value: 'Nokia'},
+            {label: 'Blackberry', value: 'Blackberry'},
+            {label: 'Mac', value: 'Mac'},
+          ]
+        }
+      ],
       items: [
         {isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
         {isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw'},
@@ -102,40 +119,70 @@ export default {
         {isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney'}
       ],
     }
+  },
+  watch: {
+    selection: {
+      handler() {
+        console.log(this.selection);
+      }
+    },
+    selectAll: {
+      handler() {
+        if (this.selectAll === true) {
+          this.dropdownItem.forEach(i => {
+            i.value.forEach(value => {
+              this.selection.push(value.value)
+            })
+          })
+        } else {
+          this.selection = []
+        }
+      }
+    },
+    search: {
+      handler() {
+      }
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.mem-transaction{
-  .page-title{
+.mem-transaction {
+  .page-title {
     font-weight: 600;
     font-size: 18px;
     color: #222A3C;
   }
-  .mem-card{
+
+  .mem-card {
     padding: 20px 0;
     background: #F4F4F9;
-    .col{
+
+    .col {
       border-right: 1px solid #DEDEEB;
-      &:last-child{
+
+      &:last-child {
         border: none;
       }
-      p{
+
+      p {
         text-transform: uppercase;
         color: #616775;
         font-size: 12px;
         margin-bottom: 10px;
       }
-      h4{
+
+      h4 {
         color: #222A3C;
         font-weight: bold;
         font-size: 20px;
       }
     }
   }
-  .mem-dropdown{
+
+  .mem-dropdown {
     max-height: 300px;
     overflow-y: scroll;
   }
@@ -143,17 +190,18 @@ export default {
 
 </style>
 <style lang="scss">
-.daterangepicker{
-  .ranges{
-    li{
+.daterangepicker {
+  .ranges {
+    li {
       border: 1px solid #DEDEEB;
       margin: 10px;
-      &.active{
+
+      &.active {
         background-color: #5458FB;
       }
     }
   }
-} 
+}
 
 </style>
 
