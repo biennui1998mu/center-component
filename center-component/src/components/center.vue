@@ -47,9 +47,11 @@
         </div>
         <div class="col-md-3">
           <div class="input-group">
-            <date-range-picker v-model="range" :options="options" :format="format" class="form-control" style="padding-right: 35px; overflow: hidden"/>
+            <date-range-picker ref="dateRankPicker" v-model="range" :options="options" :format="format"
+                               class="form-control" style="padding-right: 35px; overflow: hidden"/>
             <div class="input-group-append">
-              <b-icon-calendar class="custom-icon"></b-icon-calendar>
+              <b-icon-calendar id="calendar-icon" class="custom-icon"
+                               @click="$refs.dateRankPicker.show()"></b-icon-calendar>
             </div>
           </div>
         </div>
@@ -176,21 +178,21 @@ export default {
         {
           label: 'custom',
           value: [
-            { label: 'design', value: 'design' },
-            { label: 'Typo', value: 'Typo' },
-            { label: 'Motion', value: 'Motion' },
-            { label: 'Graphic', value: 'Graphic' },
-            { label: 'Mobile', value: 'Mobile' },
+            {label: 'design', value: 'design'},
+            {label: 'Typo', value: 'Typo'},
+            {label: 'Motion', value: 'Motion'},
+            {label: 'Graphic', value: 'Graphic'},
+            {label: 'Mobile', value: 'Mobile'},
           ]
         },
         {
           label: 'custom 2',
           value: [
-            { label: 'Samsung', value: 'Samsung' },
-            { label: 'Iphone', value: 'Iphone' },
-            { label: 'Nokia', value: 'Nokia' },
-            { label: 'Blackberry', value: 'Blackberry' },
-            { label: 'Mac', value: 'Mac' },
+            {label: 'Samsung', value: 'Samsung'},
+            {label: 'Iphone', value: 'Iphone'},
+            {label: 'Nokia', value: 'Nokia'},
+            {label: 'Blackberry', value: 'Blackberry'},
+            {label: 'Mac', value: 'Mac'},
           ]
         }
       ],
@@ -299,7 +301,7 @@ export default {
   },
   mounted() {
     this.filterArray = [...this.dropdownItem]
-  }
+  },
 }
 </script>
 
@@ -307,6 +309,7 @@ export default {
 <style lang="scss" scoped>
 .mem-transaction {
   max-width: 948px;
+
   .page-title {
     font-weight: 600;
     font-size: 18px;
@@ -422,8 +425,10 @@ export default {
   transform: translate(-50%, -50%);
   z-index: 4;
   color: #859DA7;
+  cursor: pointer;
   //color: #5458FB;
 }
+
 .custom-icon-search {
   position: absolute !important;
   z-index: 4 !important;
@@ -489,6 +494,7 @@ export default {
     font-size: 14px;
     line-height: 19px;
     color: #222A3C;
+
     .date-prefix {
       color: #9FA5B7;
     }
@@ -602,7 +608,7 @@ export default {
     }
 
     tr {
-      th:first-child, th:last-child{
+      th:first-child, th:last-child {
         color: red !important;
       }
 
@@ -636,7 +642,7 @@ export default {
   }
 }
 
-.ranges{
+.ranges {
   min-width: 168px;
 
   ul {
