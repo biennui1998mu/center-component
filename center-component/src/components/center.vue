@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="row">
-        <b-table class="customer-table" striped hover :items="items" :fields="fields">
+        <b-table class="customer-table" hover :items="items" :fields="fields">
           <template #cell(customer)="row">
             <div class="customer">
               <div class="customer-product">
@@ -81,21 +81,39 @@
           </template>
           <template #cell(date)="row">
             <div class="date">
-              <span class="date-prefix">Started: </span> {{ row.value.start }}
+              <div class="date-start">
+                <span class="date-prefix">Started: </span> {{ row.value.start }}
+              </div>
+              <div class="date-end">
+                <span v-if="row.value.end !== ''" class="date-prefix">Ended: </span>{{ row.value.end }}
+              </div>
             </div>
-            <div class="date">
-              <span v-if="row.value.end !== ''" class="date-prefix">Ended: </span>{{ row.value.end }}
-            </div>
+
           </template>
           <template #cell(status)="row">
-            <span class="status" :class="row.value ? 'status-active' : 'status-inactive'">
-              {{ row.value ? 'Active' : 'Inactive' }}
-            </span>
+            <div class="status">
+              <span :class="row.value ? 'status-active' : 'status-inactive'">
+                {{ row.value ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
           </template>
           <template #cell(amount)="row">
             <span class="amount">${{ row.value }}</span>
             <span class="amount-unit">/mo.</span>
           </template>
+          <!-- <template #cell(menu)>
+            <b-dropdown id="dropdown-more" text="" class="m-md-2">
+              <b-dropdown-item>
+                <b-img :src="'./img/profile.svg'" alt="lefticon"></b-img> Profile
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <b-img :src="'./img/pdf.svg'" alt="lefticon"></b-img> Download Invoice
+              </b-dropdown-item>
+              <b-dropdown-item>
+                <b-img :src="'./img/refund.svg'" alt="lefticon"></b-img> Refund
+              </b-dropdown-item>
+            </b-dropdown>
+          </template> -->
         </b-table>
       </div>
     </div>
@@ -112,19 +130,27 @@ export default {
       fields: [
         {
           key: 'customer',
-          sortable: true
+          sortable: true,
+          tdClass: 'align-middle'
         },
         {
           key: 'date',
-          sortable: true
+          sortable: true,
+          tdClass: 'align-middle'
         },
         {
           key: 'status',
-          sortable: true
+          sortable: true,
+          tdClass: 'align-middle'
         },
         {
           key: 'amount',
-          sortable: true
+          sortable: true,
+          tdClass: 'align-middle'
+        },
+        {
+          key: 'menu',
+          label: ''
         }
       ],
       range: [moment(), moment()],
@@ -150,21 +176,21 @@ export default {
         {
           label: 'custom',
           value: [
-            {label: 'design', value: 'design'},
-            {label: 'Typo', value: 'Typo'},
-            {label: 'Motion', value: 'Motion'},
-            {label: 'Graphic', value: 'Graphic'},
-            {label: 'Mobile', value: 'Mobile'},
+            { label: 'design', value: 'design' },
+            { label: 'Typo', value: 'Typo' },
+            { label: 'Motion', value: 'Motion' },
+            { label: 'Graphic', value: 'Graphic' },
+            { label: 'Mobile', value: 'Mobile' },
           ]
         },
         {
           label: 'custom 2',
           value: [
-            {label: 'Samsung', value: 'Samsung'},
-            {label: 'Iphone', value: 'Iphone'},
-            {label: 'Nokia', value: 'Nokia'},
-            {label: 'Blackberry', value: 'Blackberry'},
-            {label: 'Mac', value: 'Mac'},
+            { label: 'Samsung', value: 'Samsung' },
+            { label: 'Iphone', value: 'Iphone' },
+            { label: 'Nokia', value: 'Nokia' },
+            { label: 'Blackberry', value: 'Blackberry' },
+            { label: 'Mac', value: 'Mac' },
           ]
         }
       ],
@@ -280,6 +306,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .mem-transaction {
+  max-width: 948px;
   .page-title {
     font-weight: 600;
     font-size: 18px;
@@ -420,7 +447,7 @@ export default {
       .product-label {
         color: #9FA5B7;
         margin-right: 4px;
-        font-weight: 400;
+        font-weight: normal;
       }
 
       .product-list {
@@ -432,8 +459,101 @@ export default {
     .customer-info {
       display: flex;
       align-items: center;
+
+      .customer-img {
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .customer-primary-info {
+        margin-bottom: 10px;
+
+        .customer-name {
+          color: #222A3C;
+          font-weight: 600;
+        }
+
+        .customer-email {
+          color: #9FA5B7;
+          font-weight: normal;
+          margin-top: 1px;
+        }
+      }
     }
   }
+
+  .date-start, .date-end {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #222A3C;
+    .date-prefix {
+      color: #9FA5B7;
+    }
+  }
+
+  .date-start {
+    margin-bottom: 7px;
+  }
+
+  .status {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    border-radius: 31px;
+
+    .status-active {
+      padding: 4px 10px;
+      border-radius: 31px;
+      color: #14C8B1;
+      background: #E8FAF7;
+    }
+
+    .status-inactive {
+      padding: 4px 10px;
+      border-radius: 31px;
+      color: #EB5757;
+      background: #FDEEEE;
+    }
+  }
+
+  .amount {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    color: #222A3C;
+  }
+
+  .amount-unit {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+    color: #9FA5B7;
+  }
+
+  // #dropdown-more {
+  //   .btn {
+  //     padding: 1px 5px;
+  //     background: #fff;
+  //     border: none;
+  //     color: #222A3C;
+  //   }
+
+  //   .btn:hover, .btn:active {
+  //     background: #DEDEEB;
+  //     border: none;
+  //   }
+
+  //   ul {
+  //     left: unset !important;
+  //     right: -24px !important;
+  //     top: 8px !important;
+  //     border: none;
+  //     box-shadow: 0px 0px 12px 1px #dedeeb;
+  //   }
+  // }
 }
 </style>
 <style lang="scss">
