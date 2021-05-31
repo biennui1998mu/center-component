@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-3">
           <div class="input-group">
-            <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>
+            <date-range-picker v-model="range" :options="options" :format="format" class="form-control" style="padding-right: 35px; overflow: hidden"/>
             <div class="input-group-append">
               <b-icon-calendar class="custom-icon"></b-icon-calendar>
             </div>
