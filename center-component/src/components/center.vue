@@ -163,11 +163,14 @@ export default {
       border: 1px solid #DEDEEB;
       margin: 10px;
       &.active{
-        background-color: #5458FB;
+        background-color: #5458FB!important;
       }
     }
   }
 } 
+.daterangepicker td.active, .daterangepicker td.active:hover{
+  background-color: #5458FB!important;
+}
 
 </style>
 
