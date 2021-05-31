@@ -35,7 +35,8 @@
             <input v-model="search" type="text" class="form-control" placeholder="Search">
             <b-dropdown-form class="mem-dropdown">
               <b-form-checkbox v-model="selectAll" class="mb-1">Select All Courses</b-form-checkbox>
-              <b-form-checkbox-group v-model="selection" v-for="(item, index) in filterArray" :key="index" class="active-custom">
+              <b-form-checkbox-group v-model="selection" v-for="(item, index) in filterArray" :key="index"
+                                     class="active-custom">
                 <b-dropdown-header class="header-custom">
                   {{ item.label }}
                 </b-dropdown-header>
@@ -58,7 +59,48 @@
         </div>
       </div>
       <div class="row">
-        <b-table striped hover :items="items" :fields="fields"></b-table>
+        <b-table class="customer-table" striped hover :items="items" :fields="fields">
+          <template #cell(customer)="row">
+            <div class="customer">
+              <div class="customer-product">
+                <div class="product-label">
+                  Product:
+                </div>
+                <div v-for="(item, index) in row.value.products" :key="index" class="product-list">
+                  {{ item }}
+                </div>
+              </div>
+              <div class="customer-info">
+                <img class="customer-img" :src="row.value.img_path" alt="img"/>
+                <div class="customer-primary-info">
+                  <div class="customer-name">
+                    {{ row.value.name }}
+                  </div>
+                  <div class="customer-email">
+                    {{ row.value.email }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template #cell(date)="row">
+            <div class="date">
+              <span class="date-prefix">Started: </span> {{ row.value.start }}
+            </div>
+            <div class="date">
+              <span v-if="row.value.end !== ''" class="date-prefix">Ended: </span>{{ row.value.end }}
+            </div>
+          </template>
+          <template #cell(status)="row">
+            <span class="status" :class="row.value ? 'status-active' : 'status-inactive'">
+              {{ row.value ? 'Active' : 'Inactive' }}
+            </span>
+          </template>
+          <template #cell(amount)="row">
+            <span class="amount">${{ row.value }}</span>
+            <span class="amount-unit">/mo.</span>
+          </template>
+        </b-table>
       </div>
     </div>
   </div>
@@ -71,7 +113,24 @@ export default {
   name: 'HelloWorld',
   data() {
     return {
-      fields: ['first_name', 'last_name', 'age'],
+      fields: [
+        {
+          key: 'customer',
+          sortable: true
+        },
+        {
+          key: 'date',
+          sortable: true
+        },
+        {
+          key: 'status',
+          sortable: true
+        },
+        {
+          key: 'amount',
+          sortable: true
+        }
+      ],
       range: [moment(), moment()],
       options: {
         ranges: {
@@ -114,10 +173,62 @@ export default {
       ],
       filterArray: [],
       items: [
-        {isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
-        {isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw'},
-        {isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson'},
-        {isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney'}
+        {
+          customer: {
+            name: 'Jacob Jones',
+            img_path: './customer-img/Jacob.png',
+            email: 'jacob.jones@gmail.com',
+            products: ['UI Design']
+          },
+          date: {
+            start: 'Feb 2, 2020 19:30',
+            end: ''
+          },
+          status: true,
+          amount: 200
+        },
+        {
+          customer: {
+            name: 'Jerome Bell',
+            img_path: './customer-img/Jerome.png',
+            email: 'jerome.bell@gmail.com',
+            products: ['UI Design']
+          },
+          date: {
+            start: 'Feb 2, 2020 19:30',
+            end: ''
+          },
+          status: false,
+          amount: 200
+        },
+        {
+          customer: {
+            name: 'Wade Warren',
+            img_path: './customer-img/Wade.png',
+            email: 'wade.warren@gmail.com',
+            products: ['Digital Marketing']
+          },
+          date: {
+            start: 'Feb 2, 2020 19:30',
+            end: 'May 6, 2021 19:30'
+          },
+          status: false,
+          amount: 200
+        },
+        {
+          customer: {
+            name: 'Rosemary',
+            img_path: './customer-img/Rosemary.png',
+            email: 'rosemary_flores@gmail.com',
+            products: ['Computer Programming', 'Symphony']
+          },
+          date: {
+            start: 'Feb 2, 2020 19:30',
+            end: ''
+          },
+          status: false,
+          amount: 200
+        }
       ],
     }
   },
@@ -261,6 +372,35 @@ export default {
   }
 }
 
+.customer-table {
+  font-family: 'Open Sans';
+
+  .customer {
+    font-size: 14px;
+    line-height: 19px;
+
+    .customer-product {
+      display: flex;
+      margin-bottom: 11px;
+
+      .product-label {
+        color: #9FA5B7;
+        margin-right: 4px;
+        font-weight: 400;
+      }
+
+      .product-list {
+        color: #222A3C;
+        font-weight: 600;
+      }
+    }
+
+    .customer-info {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
 </style>
 <style lang="scss">
 .daterangepicker {
@@ -268,14 +408,28 @@ export default {
     li {
       border: 1px solid #DEDEEB;
       margin: 10px;
-      &.active{
-        background-color: #5458FB!important;
+
+      &.active {
+        background-color: #5458FB !important;
       }
     }
   }
 }
-.daterangepicker td.active, .daterangepicker td.active:hover{
-  background-color: #5458FB!important;
+
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: #5458FB !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 </style>
