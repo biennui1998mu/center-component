@@ -51,9 +51,7 @@
           <div class="input-group">
             <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>
             <div class="input-group-append">
-              <button class="btn" type="submit">
-                <b-icon-calendar></b-icon-calendar>
-              </button>
+              <b-icon-calendar class="custom-icon"></b-icon-calendar>
             </div>
           </div>
         </div>
@@ -319,6 +317,10 @@ export default {
     max-height: 300px;
     overflow-y: scroll;
     margin-top: 10px;
+
+    .b-dropdown-form {
+      padding: 0.25rem 0.5rem;
+    }
   }
 
   .header-custom {
@@ -370,6 +372,14 @@ export default {
     right: 10px;
     top: 50%;
   }
+}
+
+.custom-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 .customer-table {
