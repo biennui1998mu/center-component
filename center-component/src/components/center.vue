@@ -30,15 +30,16 @@
           </div>
         </div>
         <div class="col-md-3">
-          <b-dropdown text="All Courses" no-caret menu-class="w-100" block variant="outline-primary" class="w-100">
+          <b-dropdown :text="selection.join()" no-caret menu-class="w-100" block variant="outline-primary"
+                      class="w-100">
             <input v-model="search" type="text" class="form-control" placeholder="Search">
             <b-dropdown-form class="mem-dropdown">
-              <b-form-checkbox v-model="selectAll" class="mb-3">Select All Courses</b-form-checkbox>
-              <b-form-checkbox-group v-model="selection" v-for="(item, index) in dropdownItem" :key="index">
-                <b-dropdown-header>
+              <b-form-checkbox v-model="selectAll" class="mb-1">Select All Courses</b-form-checkbox>
+              <b-form-checkbox-group v-model="selection" v-for="(item, index) in filterArray" :key="index" class="active-custom">
+                <b-dropdown-header class="header-custom">
                   {{ item.label }}
                 </b-dropdown-header>
-                <b-form-checkbox v-for="(option, index) in item.value" :key="index" :value="option.value" class="mb-3">
+                <b-form-checkbox v-for="(option, index) in item.value" :key="index" :value="option.value" class="mb-1">
                   {{ option.label }}
                 </b-form-checkbox>
               </b-form-checkbox-group>
@@ -49,7 +50,7 @@
           <div class="input-group">
             <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>
             <div class="input-group-append">
-              <button class="btn btn-primary" type="submit">
+              <button class="btn" type="submit">
                 <b-icon-calendar></b-icon-calendar>
               </button>
             </div>
@@ -60,7 +61,6 @@
         <b-table striped hover :items="items" :fields="fields"></b-table>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -112,6 +112,7 @@ export default {
           ]
         }
       ],
+      filterArray: [],
       items: [
         {isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald'},
         {isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw'},
@@ -129,7 +130,8 @@ export default {
     selectAll: {
       handler() {
         if (this.selectAll === true) {
-          this.dropdownItem.forEach(i => {
+          this.selection = []
+          this.filterArray.forEach(i => {
             i.value.forEach(value => {
               this.selection.push(value.value)
             })
@@ -141,8 +143,28 @@ export default {
     },
     search: {
       handler() {
+        if (!this.search || this.search.length === 0) {
+          this.filterArray = [...this.dropdownItem];
+          return;
+        }
+        this.filterArray = [];
+        if (this.search && this.search.length > 0) {
+          this.dropdownItem.forEach(dropdownItem => {
+            const potential = dropdownItem.value.filter(item => item.value.toUpperCase().includes(this.search.toUpperCase()));
+            if (potential.length > 0) {
+              this.filterArray.push({
+                label: dropdownItem.label,
+                value: potential
+              });
+            }
+          })
+        }
+        console.log(this.filterArray);
       }
     }
+  },
+  mounted() {
+    this.filterArray = [...this.dropdownItem]
   }
 }
 </script>
@@ -187,18 +209,54 @@ export default {
     overflow-y: scroll;
     margin-top: 10px;
   }
-  /deep/.dropdown-menu{
+
+  .header-custom {
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: #859DA7;
+
+    .dropdown-header {
+      padding: 10px 0;
+    }
+  }
+
+  /deep/ .dropdown-menu {
     padding: 10px;
   }
-  /deep/.dropdown-toggle{
-    width: 100%!important;
+
+  /deep/ .dropdown-toggle {
+    width: 100% !important;
+    height: 38px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ced4da;
+    color: black;
+
+    &:hover {
+      border: 1px solid rgba(0, 209, 255, 0.8);
+      background: white;
+    }
+
+    &:focus {
+      border: none;
+    }
   }
-  /deep/ .custom-checkbox{
-    label{
+
+  /deep/ .custom-checkbox {
+    label {
       font-size: 14px;
       color: #222A3C;
       padding-left: 10px;
     }
+  }
+
+  /deep/ .dropdown-toggle::after {
+    position: absolute;
+    right: 10px;
+    top: 50%;
   }
 }
 
