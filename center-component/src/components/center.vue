@@ -69,7 +69,9 @@ import moment from 'moment'
             'This Month': [moment().startOf('month'), moment().endOf('month')],
             'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
           },
-          alwaysShowCalendars: true
+          showCustomRangeLabel: true,
+          alwaysShowCalendars: true,
+          linkedCalendars: false
         },
         format: 'MMMM DD, YYYY',
         items: [
