@@ -31,7 +31,7 @@
           </select>
         </div>
         <div class="col-md-3">
-          <date-range-picker v-model="range" class="form-control"/>
+          <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>
         </div>
       </div>
       <div class="row">
@@ -43,19 +43,31 @@
 </template>
 
 <script>
+import moment from 'moment'
   export default {
     name: 'HelloWorld',
     data() {      
       return {
-        // Note `isActive` is left out and will not appear in the rendered table
         fields: ['first_name', 'last_name', 'age'],
+        range: [moment(), moment()],
+        options: {
+          ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+          },
+          alwaysShowCalendars: true
+        },
+        format: 'MMMM DD, YYYY',
         items: [
           { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
           { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
           { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
           { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
-        ]
-        
+        ],
       }      
     }
   }
