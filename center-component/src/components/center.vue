@@ -142,6 +142,7 @@ export default {
   }
   /deep/.dropdown-menu{
     padding: 10px;
+    outline: none;
   }
   /deep/.dropdown-toggle{
     width: 100%!important;
