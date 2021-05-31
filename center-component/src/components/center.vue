@@ -1,18 +1,18 @@
 <template>
-  <div class="container">
-    <h2 class="page-title">
+  <div class="container mem-transaction">
+    <h2 class="page-title mb-4">
       Subscriptions
     </h2>
-    <b-row class="mt-3">
-      <b-col class="text-center bg-light">
+    <b-row class="mb-3 mem-card">
+      <b-col class="text-center">
         <p>Subscriptions</p>
         <h4>156</h4>
       </b-col>
-      <b-col class="text-center bg-light">
+      <b-col class="text-center">
         <p>MRR</p>
         <h4>$2,861</h4>
       </b-col>
-      <b-col class="text-center bg-light">
+      <b-col class="text-center">
         <p>Yearly revenue</p>
         <h4>$34,333</h4>
       </b-col>
@@ -87,11 +87,49 @@ import moment from 'moment'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-::v-deep .daterangepicker{
+.mem-transaction{
+  .page-title{
+    font-weight: 600;
+    font-size: 18px;
+    color: #222A3C;
+  }
+  .mem-card{
+    padding: 20px 0;
+    background: #F4F4F9;
+    .col{
+      border-right: 1px solid #DEDEEB;
+      &:last-child{
+        border: none;
+      }
+      p{
+        text-transform: uppercase;
+        color: #616775;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      h4{
+        color: #222A3C;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+</style>
+<style lang="scss">
+.daterangepicker{
   .ranges{
     li{
+      border: 1px solid #DEDEEB;
       margin: 10px;
+      &.active{
+        background-color: #5458FB;
+      }
     }
   }
 } 
+
 </style>
+
+
