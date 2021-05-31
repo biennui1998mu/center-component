@@ -29,13 +29,29 @@
             <input type="text" class="form-control" placeholder="Search">
           </div>
         </div>
-        <div class="col-md-3">
-          <select id="inputState" class="form-control">
-            <option selected>Choose...</option>
-            <option>1</option>
-            <option>1</option>
-            <option>1</option>
-          </select>
+        <div class="col-md-3">          
+          <b-dropdown id="dropdown-form" text="Dropdown test" ref="dropdown" class="m-2">
+            <input type="text" class="form-control" placeholder="Search">
+            <b-dropdown-form class="mem-dropdown">                                        
+              <b-form-checkbox class="mb-3">Select All Courses</b-form-checkbox>
+              <b-dropdown-header>
+                Custom
+              </b-dropdown-header>
+              <b-form-checkbox class="mb-3">Design</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Typo</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Motion</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Graphic</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Mobile</b-form-checkbox>
+              <b-dropdown-header>
+                Custom
+              </b-dropdown-header>
+              <b-form-checkbox class="mb-3">Design</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Typo</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Motion</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Graphic</b-form-checkbox>
+              <b-form-checkbox class="mb-3">Mobile</b-form-checkbox>
+            </b-dropdown-form>            
+          </b-dropdown>
         </div>
         <div class="col-md-3">
           <div class="input-group">
@@ -118,6 +134,10 @@ export default {
         font-size: 20px;
       }
     }
+  }
+  .mem-dropdown{
+    max-height: 300px;
+    overflow-y: scroll;
   }
 }
 
