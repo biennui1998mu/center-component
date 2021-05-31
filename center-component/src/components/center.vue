@@ -142,6 +142,7 @@ export default {
         showCustomRangeLabel: true,
         alwaysShowCalendars: true,
         linkedCalendars: false,
+        opens: 'left',
       },
       format: 'MMMM DD, YYYY',
       search: '',
@@ -334,6 +335,15 @@ export default {
     }
   }
 
+  /deep/ .input-group {
+    .form-control {
+      &:focus {
+        border: 1px solid rgba(0, 209, 255, 0.8);
+        box-shadow: none;
+      }
+    }
+  }
+
   /deep/ .dropdown-menu {
     padding: 10px;
     outline: none;
@@ -379,7 +389,8 @@ export default {
   right: 0;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
+  z-index: 4;
+  color: #5458FB;
 }
 
 .customer-table {
@@ -428,6 +439,84 @@ export default {
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
   background-color: #5458FB !important;
+}
+
+.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
+  height: 43px !important;
+}
+
+.daterangepicker .drp-buttons .btn {
+  margin-left: 5px !important;
+}
+
+.drp-selected {
+  display: none !important;
+}
+
+.table-condensed {
+  thead {
+    tr:first-child {
+      height: 40px;
+      background: #E8F3F8;
+
+      th {
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 16px;
+        color: #222A3C;
+        border-radius: 0;
+      }
+    }
+
+    tr {
+      th:first-child, th:last-child{
+        color: red !important;
+      }
+
+      th {
+        color: #5458FB;
+      }
+    }
+  }
+}
+
+.drp-buttons {
+  position: absolute !important;
+  left: 0 !important;
+  bottom: 0 !important;
+  border-top: none;
+
+  .applyBtn {
+    background: #14C8B1 !important;
+    border: 1px solid #14C8B1 !important;
+    width: 66px !important;
+    height: 33px !important;
+  }
+
+  .cancelBtn {
+    background: #FFFFFF !important;
+    border: 1px solid #DEDEEB !important;
+    border-radius: 3px !important;
+    color: #859DA7 !important;
+    width: 66px !important;
+    height: 33px !important;
+  }
+}
+
+.ranges{
+  min-width: 168px;
+
+  ul {
+    margin: 0 !important;
+  }
+
+  li {
+    width: 143px !important;
+    height: 33px !important;
+    border: 1px solid #DEDEEB !important;
+    border-radius: 3px !important;
+    text-align: center !important;
+  }
 }
 
 .sr-only {
