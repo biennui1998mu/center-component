@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="col-md-3">          
-          <b-dropdown id="dropdown-form" text="Dropdown test" ref="dropdown" class="m-2">
+          <b-dropdown  text="All Courses" no-caret menu-class="w-100" block variant="outline-primary" class="w-100">
             <input type="text" class="form-control" placeholder="Search">
             <b-dropdown-form class="mem-dropdown">                                        
               <b-form-checkbox class="mb-3">Select All Courses</b-form-checkbox>
@@ -138,6 +138,20 @@ export default {
   .mem-dropdown{
     max-height: 300px;
     overflow-y: scroll;
+    margin-top: 10px;
+  }
+  /deep/.dropdown-menu{
+    padding: 10px;
+  }
+  /deep/.dropdown-toggle{
+    width: 100%!important;
+  }
+  /deep/ .custom-checkbox{
+    label{
+      font-size: 14px;
+      color: #222A3C;
+      padding-left: 10px;
+    }
   }
 }
 
