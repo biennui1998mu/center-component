@@ -22,15 +22,13 @@
         <div class="col-md-6">
           <div class="input-group">
             <div class="input-group-prepend">
-              <button class="btn btn-primary" type="submit">
-                <b-icon-search></b-icon-search>
-              </button>
+              <b-icon-search class="custom-icon-search"></b-icon-search>
             </div>
-            <input type="text" class="form-control" placeholder="Search">
+            <input type="text" class="form-control" style="padding-left: 40px" placeholder="Search">
           </div>
         </div>
         <div class="col-md-3">
-          <b-dropdown :text="selection.join()" no-caret menu-class="w-100" block variant="outline-primary"
+          <b-dropdown :text="selection.join()" menu-class="w-100" block variant="outline-primary"
                       class="w-100">
             <input v-model="search" type="text" class="form-control" placeholder="Search">
             <b-dropdown-form class="mem-dropdown">
@@ -321,6 +319,11 @@ export default {
 
     .b-dropdown-form {
       padding: 0.25rem 0.5rem;
+
+      &:focus {
+        border: none;
+        outline: none !important;
+      }
     }
   }
 
@@ -365,7 +368,7 @@ export default {
     }
 
     &:focus {
-      border: none;
+      box-shadow: none;
     }
   }
 
@@ -381,6 +384,7 @@ export default {
     position: absolute;
     right: 10px;
     top: 50%;
+    color: #859DA7;
   }
 }
 
@@ -390,7 +394,16 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 4;
-  color: #5458FB;
+  color: #859DA7;
+  //color: #5458FB;
+}
+.custom-icon-search {
+  position: absolute !important;
+  z-index: 4 !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translate(50%, -50%) !important;
+  color: #9FA5B7 !important;
 }
 
 .customer-table {
