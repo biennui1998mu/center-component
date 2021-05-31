@@ -5,8 +5,8 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import DateRangePicker from "@gravitano/vue-date-range-picker";
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
-import '../node_modules/bootstrap/scss/bootstrap.scss';
-import '../node_modules/bootstrap-vue/src/index';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
