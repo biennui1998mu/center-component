@@ -19,8 +19,13 @@
     </b-row>
     <div class="custom-table">
       <div class="row">
-        <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="Search">
+        <div class="col-md-6">          
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button class="btn btn-primary" type="submit"><b-icon-search></b-icon-search></button>
+            </div>
+            <input type="text" class="form-control" placeholder="Search">            
+          </div>
         </div>
         <div class="col-md-3">
           <select id="inputState" class="form-control">
@@ -30,8 +35,13 @@
             <option>1</option>
           </select>
         </div>
-        <div class="col-md-3">
-          <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>
+        <div class="col-md-3">          
+          <div class="input-group">            
+            <date-range-picker v-model="range" :options="options" :format="format" class="form-control"/>     
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit"><b-icon-calendar></b-icon-calendar></button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -77,7 +87,11 @@ import moment from 'moment'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-body{
-  background: #000;
-}
+::v-deep .daterangepicker{
+  .ranges{
+    li{
+      margin: 10px;
+    }
+  }
+} 
 </style>
