@@ -289,6 +289,7 @@ export default {
 
   .date-range-box {
     font-family: 'Proxima Nova' !important;
+    padding-left: 0 !important;
   }
 
   /deep/ .dropdown {
@@ -389,6 +390,7 @@ export default {
         .product-list {
           color: #222A3C;
           font-weight: 600;
+          padding-right: 4px;
         }
       }
 
