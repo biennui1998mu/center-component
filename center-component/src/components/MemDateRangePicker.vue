@@ -1,9 +1,10 @@
 <template>
-  <date-range-picker v-model="range" :options="options" :format="format"
+  <date-range-picker ref="daterange" v-model="range" :options="options" :format="format"
                      class="form-control" style="padding-right: 35px; overflow: hidden"/>
 </template>
 <script>
 import moment from "moment";
+import $ from "jquery";
 
 export default {
   data() {
@@ -25,6 +26,15 @@ export default {
       },
       format: 'MMMM DD, YYYY',
     }
+  },
+  mounted() {
+    const el = $(this.$refs.daterange.$el)
+    el.on('show.daterangepicker', () => {
+      document.getElementById('calendar-icon').style.color = '#5458FB'
+    })
+    el.on('hide.daterangepicker', () => {
+      document.getElementById('calendar-icon').style.color = '#859DA7'
+    })
   }
 }
 </script>
