@@ -30,10 +30,12 @@ export default {
   mounted() {
     const el = $(this.$refs.daterange.$el)
     el.on('show.daterangepicker', () => {
-      document.getElementById('calendar-icon').style.color = '#5458FB'
+      document.getElementById('calendar-icon').style.display = 'block'
+      document.getElementById('calendar-icon-disable').style.display = 'none'
     })
     el.on('hide.daterangepicker', () => {
-      document.getElementById('calendar-icon').style.color = '#859DA7'
+      document.getElementById('calendar-icon').style.display = 'none'
+      document.getElementById('calendar-icon-disable').style.display = 'block'
     })
   }
 }
