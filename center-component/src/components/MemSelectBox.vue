@@ -1,44 +1,53 @@
 <template>
   <div>
     <b-dropdown :text="selection.join()" menu-class="w-100" block variant="outline-primary"
-              class="w-100">
-    <input v-model="search" type="text" class="form-control" placeholder="Search">
-    <b-dropdown-form class="mem-dropdown">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
-          <symbol id="checkmark" viewBox="0 0 12 10">
-            <path d="M11.6795 0.827822L10.9024 0.214251C10.5193 -0.0877654 10.2967 -0.0842683 9.96874 0.313122L4.32044 7.1511L1.69186 5.00869C1.32922 4.70985 1.10237 4.72574 0.804223 5.09134L0.20436 5.85751C-0.0999462 6.23328 -0.0610573 6.4466 0.298666 6.74131L4.04497 9.78118C4.43062 10.0991 4.64775 10.0663 4.9459 9.71061L11.7771 1.74341C12.0979 1.36509 12.0785 1.13906 11.6795 0.827822Z" fill="#14C8B1"/>
-          </symbol>
-        </svg>
-        <div class="promoted-checkbox">
-          <input id="selectAll" v-model="selectAll" type="checkbox" class="promoted-input-checkbox"/>
-          <label for="selectAll">
-            <svg><use xlink:href="#checkmark" /></svg>
-            Select All Courses
-          </label>
-        </div>
-      </div>
-      <b-form-checkbox-group v-model="selection" v-for="(item, index) in filterArray" :key="index">
-        <b-dropdown-header class="header-custom">
-          {{ item.label }}
-        </b-dropdown-header>
-        <div v-for="(option, index) in item.value" :key="index">
+                class="w-100">
+      <input v-model="search" type="text" class="form-control" placeholder="Search">
+      <b-dropdown-form class="mem-dropdown">
+        <div class="custom-checkbox-hover">
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
             <symbol id="checkmark" viewBox="0 0 12 10">
-              <path d="M11.6795 0.827822L10.9024 0.214251C10.5193 -0.0877654 10.2967 -0.0842683 9.96874 0.313122L4.32044 7.1511L1.69186 5.00869C1.32922 4.70985 1.10237 4.72574 0.804223 5.09134L0.20436 5.85751C-0.0999462 6.23328 -0.0610573 6.4466 0.298666 6.74131L4.04497 9.78118C4.43062 10.0991 4.64775 10.0663 4.9459 9.71061L11.7771 1.74341C12.0979 1.36509 12.0785 1.13906 11.6795 0.827822Z" fill="#14C8B1"/>
+              <path
+                  d="M11.6795 0.827822L10.9024 0.214251C10.5193 -0.0877654 10.2967 -0.0842683 9.96874 0.313122L4.32044 7.1511L1.69186 5.00869C1.32922 4.70985 1.10237 4.72574 0.804223 5.09134L0.20436 5.85751C-0.0999462 6.23328 -0.0610573 6.4466 0.298666 6.74131L4.04497 9.78118C4.43062 10.0991 4.64775 10.0663 4.9459 9.71061L11.7771 1.74341C12.0979 1.36509 12.0785 1.13906 11.6795 0.827822Z"
+                  fill="#14C8B1"/>
             </symbol>
           </svg>
           <div class="promoted-checkbox">
-            <input :id="option.label" v-model="selection" :value="option.value" type="checkbox" class="promoted-input-checkbox"/>
-            <label :for="option.label">
-              <svg><use xlink:href="#checkmark" /></svg>
-              {{ option.label.charAt(0).toUpperCase() + option.label.slice(1)}}
+            <input id="selectAll" v-model="selectAll" type="checkbox" class="promoted-input-checkbox"/>
+            <label for="selectAll">
+              <svg>
+                <use xlink:href="#checkmark"/>
+              </svg>
+              Select All Courses
             </label>
           </div>
         </div>
-      </b-form-checkbox-group>
-    </b-dropdown-form>
-  </b-dropdown>
+        <b-form-checkbox-group v-model="selection" v-for="(item, index) in filterArray" :key="index">
+          <b-dropdown-header class="header-custom">
+            {{ item.label }}
+          </b-dropdown-header>
+          <div class="custom-checkbox-hover" v-for="(option, index) in item.value" :key="index">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+              <symbol id="checkmark" viewBox="0 0 12 10">
+                <path
+                    d="M11.6795 0.827822L10.9024 0.214251C10.5193 -0.0877654 10.2967 -0.0842683 9.96874 0.313122L4.32044 7.1511L1.69186 5.00869C1.32922 4.70985 1.10237 4.72574 0.804223 5.09134L0.20436 5.85751C-0.0999462 6.23328 -0.0610573 6.4466 0.298666 6.74131L4.04497 9.78118C4.43062 10.0991 4.64775 10.0663 4.9459 9.71061L11.7771 1.74341C12.0979 1.36509 12.0785 1.13906 11.6795 0.827822Z"
+                    fill="#14C8B1"/>
+              </symbol>
+            </svg>
+            <div class="promoted-checkbox">
+              <input :id="option.label" v-model="selection" :value="option.value" type="checkbox"
+                     class="promoted-input-checkbox"/>
+              <label :for="option.label">
+                <svg>
+                  <use xlink:href="#checkmark"/>
+                </svg>
+                {{ option.label.charAt(0).toUpperCase() + option.label.slice(1) }}
+              </label>
+            </div>
+          </div>
+        </b-form-checkbox-group>
+      </b-dropdown-form>
+    </b-dropdown>
   </div>
 </template>
 <script>
@@ -127,7 +136,7 @@ export default {
   margin-top: 10px;
 
   .b-dropdown-form {
-    padding: 0.25rem 0.5rem;
+    padding: 0;
 
     &:focus {
       border: none;
@@ -146,27 +155,20 @@ export default {
     padding: 10px 0;
   }
 }
+
+.custom-checkbox-hover {
+  cursor: pointer;
+  padding: 4px;
+  font-family: Open Sans;
+  font-size: 14px;
+
+  &:hover {
+    background: #F4F4F9;
+    border-radius: 3px;
+  }
+}
 </style>
 <style lang="scss">
-// input[type=checkbox] {
-//   cursor: pointer;
-//   color: #14C8B1;
-// }
-
-// input[type=checkbox]:after {
-//   content: "";
-//   background-color: #FFFFFF;
-// }
-
-// input[type=checkbox]:checked:after {
-//   content: "\2714";
-//   font-size: 8px;
-//   border: 0.1px solid #14C8B1;
-// }
-
-
-
-
 $brand: #14C8B1;
 $grey-25: #e6e6e6;
 $grey-5: #fcfcfc;
@@ -175,15 +177,15 @@ $grey-5: #fcfcfc;
   box-sizing: border-box;
 }
 
-
 /* HTML5 Boilerplate accessible hidden styles */
 .promoted-input-checkbox {
-  border: 0; 
-  clip: rect(0 0 0 0); 
-  height: 1px; margin: -1px; 
-  overflow: hidden; 
-  padding: 0; 
-  position: absolute; 
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
   width: 1px;
 }
 
@@ -193,16 +195,18 @@ $grey-5: #fcfcfc;
     height: 24px;
     animation: draw-checkbox ease-in-out 0.2s forwards;
   }
-  
+
   label:active::after {
     background-color: $grey-25;
   }
-  
+
   label {
     color: #222A3C;
     line-height: 20px;
     cursor: pointer;
     position: relative;
+    width: 100%;
+
     &:after {
       content: "";
       height: 20px;
@@ -211,10 +215,11 @@ $grey-5: #fcfcfc;
       float: left;
       border: 2px solid $brand;
       border-radius: 3px;
-      transition: 0.15s all ease-out;      
+      transition: 0.15s all ease-out;
     }
   }
-  svg {    
+
+  svg {
     height: 0; //Firefox fix
     width: 12px;
     position: absolute;
@@ -223,5 +228,4 @@ $grey-5: #fcfcfc;
     stroke-dasharray: 33; //Firefox fix
   }
 }
-
 </style>
