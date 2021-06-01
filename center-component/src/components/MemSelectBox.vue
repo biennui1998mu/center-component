@@ -197,7 +197,7 @@ $grey-5: #fcfcfc;
       content: "";
       height: 20px;
       width: 20px;
-      margin-right: 10px;
+      margin-right: 5px;
       float: left;
       border: 2px solid $brand;
       border-radius: 3px;
