@@ -4,7 +4,6 @@
 </template>
 <script>
 import moment from "moment";
-import $ from "jquery";
 
 export default {
   data() {
@@ -27,17 +26,6 @@ export default {
       format: 'MMMM DD, YYYY',
     }
   },
-  mounted() {
-    const el = $(this.$refs.daterange.$el)
-    el.on('show.daterangepicker', () => {
-      document.getElementById('calendar-icon').style.display = 'block'
-      document.getElementById('calendar-icon-disable').style.display = 'none'
-    })
-    el.on('hide.daterangepicker', () => {
-      document.getElementById('calendar-icon').style.display = 'none'
-      document.getElementById('calendar-icon-disable').style.display = 'block'
-    })
-  }
 }
 </script>
 <style lang="scss" scoped>

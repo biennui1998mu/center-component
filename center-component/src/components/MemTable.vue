@@ -34,7 +34,7 @@
           <div class="input-group">
             <mem-date-rank-picker ref="dateRankPicker"></mem-date-rank-picker>
             <div class="input-group-append" @click="$refs.dateRankPicker.$refs.daterange.show()">
-              <img id="calendar-icon" class="custom-icon" style="display: none; right: -2px" src="../../public/img/calendar.svg" alt="">
+<!--              <img id="calendar-icon" class="custom-icon" style="display: none; right: -2px" src="../../public/img/calendar.svg" alt="">-->
               <img id="calendar-icon-disable" class="custom-icon" src="../../public/img/calendar-disable.svg" alt="">
             </div>
           </div>
