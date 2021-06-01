@@ -165,13 +165,6 @@ $grey-5: #fcfcfc;
   box-sizing: border-box;
 }
 
-.form-container {
-  padding: 1rem;
-  margin: 2rem auto;
-  background-color: $grey-5;
-  border: 1px solid $grey-25;
-  width: 50%;
-}
 
 /* HTML5 Boilerplate accessible hidden styles */
 .promoted-input-checkbox {
@@ -196,7 +189,7 @@ $grey-5: #fcfcfc;
   }
   
   label {
-    color: $brand;
+    color: #222A3C;
     line-height: 20px;
     cursor: pointer;
     position: relative;
@@ -204,15 +197,14 @@ $grey-5: #fcfcfc;
       content: "";
       height: 20px;
       width: 20px;
-      margin-right: 1rem;
+      margin-right: 10px;
       float: left;
       border: 2px solid $brand;
       border-radius: 3px;
       transition: 0.15s all ease-out;      
     }
   }
-  svg {
-    
+  svg {    
     height: 0; //Firefox fix
     width: 12px;
     position: absolute;
@@ -222,12 +214,4 @@ $grey-5: #fcfcfc;
   }
 }
 
-// @keyframes draw-checkbox {
-//   0% {
-//     stroke-dashoffset: 33;
-//   }
-//   100% {
-//     stroke-dashoffset: 0;
-//   }
-// }
 </style>
