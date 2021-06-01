@@ -32,116 +32,126 @@ export default {
 
 </style>
 <style lang="scss">
+
 .daterangepicker {
   font-family: 'Proxima Nova' !important;
+  border: 1px solid #DEDEEB !important;
+  box-shadow: 0px 4px 25px rgba(25, 26, 79, 0.1) !important;
 
+  .drp-calendar {
+    .calendar-table {
+      .table-condensed {
+        thead {
+          tr {
+            th {
+              min-width: 40px;
+              height: 40px;
+              font-weight: bold;
+              font-size: 13px;
+              line-height: 16px;
+              color: #5458FB;
+              border-radius: 0;
+              &:first-child, &:last-child {
+                color: #EB5757;
+              }
+            }
+            &:first-child {
+              th {
+                color: #222A3C;
+                background: #E8F3F8;
+              }
+
+            }
+            .prev, .next {
+              height: 40px;
+              background: #E8F3F8;
+              &:active {
+                background: #DEDEEB;
+              }
+              &:hover {
+                background: #DEDEEB;
+              }
+            }
+          }
+        }
+        tbody {
+          tr {
+            td {
+              height: 40px;
+            }
+            .in-range {
+              background: #E8F3F8;
+            }
+            .start-date {
+              background: #5458FB;
+            }
+            .end-date {
+              background: #5458FB;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .left {
+    margin-right: 23px !important;
+    border-left: none !important;
+  }
+
+  .right {
+    margin-right: 27px !important
+  }
   .ranges {
-    min-width: 168px;
     float: right !important;
-
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 1px solid #DEDEEB;
     li {
       border: 1px solid #DEDEEB;
       margin: 10px 0;
       border: 1px solid #DEDEEB !important;
       border-radius: 3px !important;
       text-align: center !important;
-
+      font-size: 14px !important;
+      line-height: 16px !important;
+      color: #222A3C !important;
+      font-weight: normal;
       &.active {
         background-color: #5458FB !important;
+        color: #FFFFFF !important;
       }
     }
   }
-}
-td.active, td.active:hover {
-  background-color: #5458FB !important;
-}
 
-.calendar-table {
-  th, td {
-    height: 43px !important;
-  }
-}
-
-.drp-buttons .btn {
-  margin-left: 5px !important;
-}
-
-.drp-selected {
-  display: none !important;
-}
-
-.table-condensed {
-  thead {
-    th {
-      min-width: 40px;
-
-      tr:first-child {
-        height: 40px;
-        background: #E8F3F8;
-
-        th {
-          font-weight: bold;
-          font-size: 13px;
-          line-height: 16px;
-          color: #222A3C;
-          border-radius: 0;
-        }
+  .drp-buttons {
+    border-top: none !important;
+    padding: 0 8px 15px !important;
+    .btn {
+      margin-left: 5px !important;
+      width: 66px !important;
+      height: 33px !important;
+      border-radius: 3px !important;
+      font-family: 'Proxima Nova' !important;
+      font-weight: normal !important;
+      font-size: 14px !important;
+      line-height: 16px !important;
+      &.active {
+        color: #FFFFFF;
       }
     }
-
-    tr {
-      th:first-child, th:last-child {
-        color: #F00 !important;
-      }
-
-      th {
-        color: #5458FB;
-      }
+    .drp-selected {
+      display: none !important;
     }
-  }
-}
-
-.drp-selected {
-  display: none !important;
-}
-
-
-.drp-buttons {
-  position: absolute !important;
-  right: 19px !important;
-  bottom: 0 !important;
-  border-top: none !important;
-
-  .applyBtn {
-    background: #14C8B1 !important;
-    border: 1px solid #14C8B1 !important;
-    width: 66px !important;
-    height: 33px !important;
-  }
-
-  .cancelBtn {
-    background: #FFFFFF !important;
-    border: 1px solid #DEDEEB !important;
-    border-radius: 3px !important;
-    color: #859DA7 !important;
-    width: 66px !important;
-    height: 33px !important;
-  }
-}
-
-.ranges {
-  min-width: 168px;
-
-  ul {
-    margin: 0 !important;
-  }
-
-  li {
-    width: 143px !important;
-    height: 33px !important;
-    border: 1px solid #DEDEEB !important;
-    border-radius: 3px !important;
-    text-align: center !important;
+    .applyBtn {
+      background: #14C8B1 !important;
+      border: 1px solid #14C8B1 !important;
+    }
+    .cancelBtn {
+      background: #FFFFFF !important;
+      border: 1px solid #DEDEEB !important;
+      color: #859DA7 !important;
+    }
   }
 }
 </style>
