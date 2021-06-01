@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <center/>
+    <mem-table/>
   </div>
 </template>
 
 <script>
-import center from './components/center.vue'
+import MemTable from './components/MemTable.vue'
 
 export default {
   name: 'App',
   components: {
-    center
+    MemTable
   }
 }
 </script>
