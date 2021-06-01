@@ -729,10 +729,22 @@ export default {
 
   ul {
     left: unset !important;
-    right: -24px !important;
-    top: 8px !important;
+    right: 2px !important;
+    top: 6px !important;
     border: none;
     box-shadow: 0px 0px 12px 1px #dedeeb;
+    li {
+      .dropdown-item {
+        &:active {
+          background-color: #fff !important;
+          color: #222A3C;
+        }
+      }
+
+      img {
+        margin-right: 7px;
+      }
+    }
   }
 }
 
