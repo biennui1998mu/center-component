@@ -47,8 +47,7 @@
         </div>
         <div class="col-md-3 date-range-box">
           <div class="input-group">
-            <date-range-picker ref="dateRankPicker" v-model="range" :options="options" :format="format"
-                               class="form-control" style="padding-right: 35px; overflow: hidden"/>
+            <date-rank-picker ref="dateRankPicker"></date-rank-picker>
             <div class="input-group-append">
               <b-icon-calendar id="calendar-icon" class="custom-icon"
                                @click="$refs.dateRankPicker.show()"></b-icon-calendar>
@@ -129,10 +128,13 @@
 </template>
 
 <script>
-import moment from 'moment'
+import DateRankPicker from './daterangepicker'
 
 export default {
   name: 'HelloWorld',
+  components: {
+    DateRankPicker
+  },
   data() {
     return {
       fields: [
@@ -166,22 +168,6 @@ export default {
           tdClass: 'align-middle'
         }
       ],
-      range: [moment(), moment()],
-      options: {
-        ranges: {
-          'Today': [moment(), moment()],
-          'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-          'Last week': [moment().subtract(6, 'days'), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
-          'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
-          'All Time': []
-        },
-        showCustomRangeLabel: true,
-        alwaysShowCalendars: true,
-        linkedCalendars: false,
-        opens: 'left',
-      },
-      format: 'MMMM DD, YYYY',
       search: '',
       selection: [],
       selectAll: false,
@@ -630,204 +616,90 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
 
-.daterangepicker {
-  font-family: 'Proxima Nova' !important;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-  .ranges {
-    min-width: 168px;
-    float: right !important;
+#dropdown-more {
+
+  .btn {
+    padding: 1px 5px;
+    background: #fff0;
+    border: none;
+    color: #222A3C;
+
+    &::after {
+      width: 24px;
+      content: '\2807' !important;
+      border-top: 0 !important;
+      vertical-align: unset !important;
+      font-size: 22px;
+      font-weight: 700;
+      position: static;
+    }
+  }
+
+  .btn:hover, .btn:active {
+    background: #DEDEEB;
+    border: none;
+  }
+
+  ul {
+    left: unset !important;
+    right: 2px !important;
+    top: 6px !important;
+    border: none;
+    box-shadow: 0px 0px 12px 1px #dedeeb;
 
     li {
-      border: 1px solid #DEDEEB;
-      margin: 10px 0;
-      border: 1px solid #DEDEEB !important;
-      border-radius: 3px !important;
-      text-align: center !important;
+      .dropdown-item {
+        &:active {
+          background-color: #fff !important;
+          color: #222A3C;
+        }
+      }
 
-      &.active {
-        background-color: #5458FB !important;
+      img {
+        margin-right: 7px;
       }
     }
   }
 }
 
-  td.active, td.active:hover {
-    background-color: #5458FB !important;
-  }
+.customer-table {
+  thead {
+    th {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: normal;
+      color: #9FA5B7;
+      background-image: none !important;
 
-  .calendar-table {
-    th, td {
-      height: 43px !important;
-    }
-  }
-
-  .drp-buttons .btn {
-    margin-left: 5px !important;
-  }
-
-  .drp-selected {
-    display: none !important;
-  }
-
-  .table-condensed {
-    thead {
-      th {
-        min-width: 40px;
-
-        tr:first-child {
-          height: 40px;
-          background: #E8F3F8;
-
-          th {
-            font-weight: bold;
-            font-size: 13px;
-            line-height: 16px;
-            color: #222A3C;
-            border-radius: 0;
-          }
-        }
+      div {
+        display: inline;
+        padding-right: 13px;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'%3e%3cpath fill='black' opacity='.3' d='M51 1l25 23 24 22H1l25-22zM51 101l25-23 24-22H1l25 22z'/%3e%3c/svg%3e");
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: 8px 8px;
       }
 
-      tr {
-        th:first-child, th:last-child {
-          color: #F00 !important;
-        }
-
-        th {
-          color: #5458FB;
-        }
-      }
-    }
-  }
-
-  .drp-selected {
-    display: none !important;
-  }
-
-
-  .drp-buttons {
-    position: absolute !important;
-    right: 19px !important;
-    bottom: 0 !important;
-    border-top: none !important;
-
-    .applyBtn {
-      background: #14C8B1 !important;
-      border: 1px solid #14C8B1 !important;
-      width: 66px !important;
-      height: 33px !important;
-    }
-
-    .cancelBtn {
-      background: #FFFFFF !important;
-      border: 1px solid #DEDEEB !important;
-      border-radius: 3px !important;
-      color: #859DA7 !important;
-      width: 66px !important;
-      height: 33px !important;
-    }
-  }
-
-  .ranges {
-    min-width: 168px;
-
-    ul {
-      margin: 0 !important;
-    }
-
-    li {
-      width: 143px !important;
-      height: 33px !important;
-      border: 1px solid #DEDEEB !important;
-      border-radius: 3px !important;
-      text-align: center !important;
-    }
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  #dropdown-more {
-
-    .btn {
-      padding: 1px 5px;
-      background: #fff0;
-      border: none;
-      color: #222A3C;
-
-      &::after {
-        width: 24px;
-        content: '\2807' !important;
-        border-top: 0 !important;
-        vertical-align: unset !important;
-        font-size: 22px;
-        font-weight: 700;
-        position: static;
-      }
-    }
-
-    .btn:hover, .btn:active {
-      background: #DEDEEB;
-      border: none;
-    }
-
-    ul {
-      left: unset !important;
-      right: 2px !important;
-      top: 6px !important;
-      border: none;
-      box-shadow: 0px 0px 12px 1px #dedeeb;
-
-      li {
-        .dropdown-item {
-          &:active {
-            background-color: #fff !important;
-            color: #222A3C;
-          }
-        }
-
-        img {
-          margin-right: 7px;
-        }
-      }
-    }
-  }
-
-  .customer-table {
-    thead {
-      th {
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: normal;
-        color: #9FA5B7;
-        background-image: none !important;
-
+      &:last-child {
         div {
-          display: inline;
-          padding-right: 13px;
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'%3e%3cpath fill='black' opacity='.3' d='M51 1l25 23 24 22H1l25-22zM51 101l25-23 24-22H1l25 22z'/%3e%3c/svg%3e");
-          background-position: right center;
-          background-repeat: no-repeat;
-          background-size: 8px 8px;
-        }
-
-        &:last-child {
-          div {
-            background-image: none !important;
-          }
+          background-image: none !important;
         }
       }
     }
   }
+}
 </style>
 
 
