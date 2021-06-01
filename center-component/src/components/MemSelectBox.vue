@@ -1,5 +1,20 @@
 <template>
-  <b-dropdown :text="selection.join()" menu-class="w-100" block variant="outline-primary"
+  <div>
+    
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="checkmark" viewBox="0 0 12 10">        
+        <path d="M11.6795 0.827822L10.9024 0.214251C10.5193 -0.0877654 10.2967 -0.0842683 9.96874 0.313122L4.32044 7.1511L1.69186 5.00869C1.32922 4.70985 1.10237 4.72574 0.804223 5.09134L0.20436 5.85751C-0.0999462 6.23328 -0.0610573 6.4466 0.298666 6.74131L4.04497 9.78118C4.43062 10.0991 4.64775 10.0663 4.9459 9.71061L11.7771 1.74341C12.0979 1.36509 12.0785 1.13906 11.6795 0.827822Z" fill="#14C8B1"/>
+      </symbol>
+    </svg>
+    <div class="promoted-checkbox">
+      <input id="tmp" type="checkbox" class="promoted-input-checkbox"/>
+      <label for="tmp">
+        <svg><use xlink:href="#checkmark" /></svg>      
+        Select All Courses   
+      </label>
+    </div>
+    <b-dropdown :text="selection.join()" menu-class="w-100" block variant="outline-primary"
               class="w-100">
     <input v-model="search" type="text" class="form-control" placeholder="Search">
     <b-dropdown-form class="mem-dropdown">
@@ -14,6 +29,7 @@
       </b-form-checkbox-group>
     </b-dropdown-form>
   </b-dropdown>
+  </div>
 </template>
 <script>
 export default {
@@ -122,19 +138,96 @@ export default {
 }
 </style>
 <style lang="scss">
-input[type=checkbox] {
-  cursor: pointer;
-  color: #14C8B1;
+// input[type=checkbox] {
+//   cursor: pointer;
+//   color: #14C8B1;
+// }
+
+// input[type=checkbox]:after {
+//   content: "";
+//   background-color: #FFFFFF;
+// }
+
+// input[type=checkbox]:checked:after {
+//   content: "\2714";
+//   font-size: 8px;
+//   border: 0.1px solid #14C8B1;
+// }
+
+
+
+
+$brand: #14C8B1;
+$grey-25: #e6e6e6;
+$grey-5: #fcfcfc;
+
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-input[type=checkbox]:after {
-  content: "";
-  background-color: #FFFFFF;
+.form-container {
+  padding: 1rem;
+  margin: 2rem auto;
+  background-color: $grey-5;
+  border: 1px solid $grey-25;
+  width: 50%;
 }
 
-input[type=checkbox]:checked:after {
-  content: "\2714";
-  font-size: 8px;
-  border: 0.1px solid #14C8B1;
+/* HTML5 Boilerplate accessible hidden styles */
+.promoted-input-checkbox {
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px;
 }
+
+.promoted-checkbox {
+  input:checked + label > svg {
+    // Firefox doesn't render svg's that is loading with the use tag if its been set to display: none and then toggled to display: block, so you have to use tricks like this to get it to render again:
+    height: 24px;
+    animation: draw-checkbox ease-in-out 0.2s forwards;
+  }
+  
+  label:active::after {
+    background-color: $grey-25;
+  }
+  
+  label {
+    color: $brand;
+    line-height: 20px;
+    cursor: pointer;
+    position: relative;
+    &:after {
+      content: "";
+      height: 20px;
+      width: 20px;
+      margin-right: 1rem;
+      float: left;
+      border: 2px solid $brand;
+      border-radius: 3px;
+      transition: 0.15s all ease-out;      
+    }
+  }
+  svg {
+    
+    height: 0; //Firefox fix
+    width: 12px;
+    position: absolute;
+    left: 4px;
+    top: -2px;
+    stroke-dasharray: 33; //Firefox fix
+  }
+}
+
+// @keyframes draw-checkbox {
+//   0% {
+//     stroke-dashoffset: 33;
+//   }
+//   100% {
+//     stroke-dashoffset: 0;
+//   }
+// }
 </style>
