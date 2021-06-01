@@ -439,48 +439,48 @@ export default {
         box-shadow: none;
       }
     }
+  }
 
-    /deep/ .dropdown-menu {
-      padding: 10px;
-      outline: none;
+  /deep/ .dropdown-toggle {
+    width: 100% !important;
+    height: 38px;
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    border: 1px solid #ced4da;
+    color: black;
+
+    &:hover {
+      border: 1px solid rgba(0, 209, 255, 0.8);
+      background: white;
     }
 
-    /deep/ .dropdown-toggle {
-      width: 100% !important;
-      height: 38px;
-      padding-right: 25px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      border: 1px solid #ced4da;
-      color: black;
-
-      &:hover {
-        border: 1px solid rgba(0, 209, 255, 0.8);
-        background: white;
-      }
-
-      &:focus {
-        border: 1px solid rgba(0, 209, 255, 0.8);
-        box-shadow: none;
-        background: white;
-      }
+    &:focus {
+      border: 1px solid rgba(0, 209, 255, 0.8);
+      box-shadow: none;
+      background: white;
     }
+  }
 
-    /deep/ .custom-checkbox {
-      label {
-        font-size: 14px;
-        color: #222A3C;
-        padding-left: 10px;
-      }
-    }
+  /deep/ .dropdown-menu {
+    padding: 10px;
+    outline: none;
+  }
 
-    /deep/ .dropdown-toggle::after {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      color: #859DA7;
+  /deep/ .custom-checkbox {
+    label {
+      font-size: 14px;
+      color: #222A3C;
+      padding-left: 10px;
     }
+  }
+
+  /deep/ .dropdown-toggle::after {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    color: #859DA7;
   }
 
   .custom-icon {
@@ -707,9 +707,9 @@ export default {
 
   .drp-buttons {
     position: absolute !important;
-    right: 0 !important;
+    right: 19px !important;
     bottom: 0 !important;
-    border-top: none;
+    border-top: none !important;
 
     .applyBtn {
       background: #14C8B1 !important;
