@@ -598,63 +598,74 @@ export default {
 .daterangepicker {
   font-family: 'Proxima Nova' !important;
   .ranges {
+    min-width: 168px;
+    float: right !important;
     li {
       border: 1px solid #DEDEEB;
-      margin: 10px;
-
+      margin: 10px 0;
+      border: 1px solid #DEDEEB !important;
+      border-radius: 3px !important;
+      text-align: center !important;
       &.active {
         background-color: #5458FB !important;
       }
     }
   }
-}
 
-.daterangepicker td.active, .daterangepicker td.active:hover {
-  background-color: #5458FB !important;
-}
+  td.active,  td.active:hover {
+    background-color: #5458FB !important;
+  }
 
-.daterangepicker .calendar-table th, .daterangepicker .calendar-table td {
-  height: 43px !important;
-}
+  .calendar-table {
+    th, td {
+      height: 43px !important;
+    }
+  }
 
-.daterangepicker .drp-buttons .btn {
-  margin-left: 5px !important;
+  .drp-buttons .btn {
+    margin-left: 5px !important;
+  }
+
+ .table-condensed {
+    thead {
+      th {
+        min-width: 40px;
+      }
+      tr:first-child {
+        height: 40px;
+        background: #E8F3F8;
+        th {
+          font-weight: bold;
+          font-size: 13px;
+          line-height: 16px;
+          color: #222A3C;
+          border-radius: 0;
+        }
+      }
+
+      tr {
+        th:first-child, th:last-child{
+          color: #F00 !important;
+        }
+
+        th {
+          color: #5458FB;
+        }
+      }
+    }
+  }
+
 }
 
 .drp-selected {
   display: none !important;
 }
 
-.table-condensed {
-  thead {
-    tr:first-child {
-      height: 40px;
-      background: #E8F3F8;
 
-      th {
-        font-weight: bold;
-        font-size: 13px;
-        line-height: 16px;
-        color: #222A3C;
-        border-radius: 0;
-      }
-    }
-
-    tr {
-      th:first-child, th:last-child{
-        color: red !important;
-      }
-
-      th {
-        color: #5458FB;
-      }
-    }
-  }
-}
 
 .drp-buttons {
   position: absolute !important;
-  left: 0 !important;
+  right: 0 !important;
   bottom: 0 !important;
   border-top: none;
 
@@ -672,22 +683,6 @@ export default {
     color: #859DA7 !important;
     width: 66px !important;
     height: 33px !important;
-  }
-}
-
-.ranges{
-  min-width: 168px;
-
-  ul {
-    margin: 0 !important;
-  }
-
-  li {
-    width: 143px !important;
-    height: 33px !important;
-    border: 1px solid #DEDEEB !important;
-    border-radius: 3px !important;
-    text-align: center !important;
   }
 }
 
