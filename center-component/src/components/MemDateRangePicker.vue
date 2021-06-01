@@ -61,10 +61,12 @@ export default {
               line-height: 16px;
               color: #5458FB;
               border-radius: 0;
+
               &:first-child, &:last-child {
                 color: #EB5757;
               }
             }
+
             &:first-child {
               th {
                 color: #222A3C;
@@ -72,29 +74,36 @@ export default {
               }
 
             }
+
             .prev, .next {
               height: 40px;
               background: #E8F3F8;
+
               &:active {
                 background: #DEDEEB;
               }
+
               &:hover {
                 background: #DEDEEB;
               }
             }
           }
         }
+
         tbody {
           tr {
             td {
               height: 40px;
             }
+
             .in-range {
               background: #E8F3F8;
             }
+
             .start-date {
               background: #5458FB;
             }
+
             .end-date {
               background: #5458FB;
             }
@@ -112,11 +121,14 @@ export default {
   .right {
     margin-right: 27px !important
   }
+
   .ranges {
     float: right !important;
     padding-left: 10px;
     padding-right: 10px;
     border-left: 1px solid #DEDEEB;
+    padding-bottom: 45px;
+
     li {
       border: 1px solid #DEDEEB;
       margin: 10px 0;
@@ -127,6 +139,7 @@ export default {
       line-height: 16px !important;
       color: #222A3C !important;
       font-weight: normal;
+
       &.active {
         background-color: #5458FB !important;
         color: #FFFFFF !important;
@@ -136,7 +149,11 @@ export default {
 
   .drp-buttons {
     border-top: none !important;
-    padding: 0 8px 15px !important;
+    padding: 0 8px 10px !important;
+    position: absolute;
+    right: 3px;
+    bottom: 0;
+
     .btn {
       margin-left: 5px !important;
       width: 66px !important;
@@ -146,22 +163,27 @@ export default {
       font-weight: normal !important;
       font-size: 14px !important;
       line-height: 16px !important;
+
       &.active {
         color: #FFFFFF;
       }
     }
+
     .drp-selected {
       display: none !important;
     }
+
     .applyBtn {
       background: #14C8B1 !important;
       border: 1px solid #14C8B1 !important;
     }
+
     .cancelBtn {
       background: #FFFFFF !important;
       border: 1px solid #DEDEEB !important;
       color: #859DA7 !important;
     }
   }
+
 }
 </style>
