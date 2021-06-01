@@ -270,7 +270,6 @@ export default {
     /deep/ .input-group {
       height: 44px;
       max-width: 360px;
-
       .form-control {
         border: 1px solid #DEDEEB;
         box-shadow: none;
@@ -289,16 +288,8 @@ export default {
     }
   }
 
-  .search-box {
-    padding-right: 0;
-  }
-
-  .select-box {
-    padding-right: 12px;
-  }
-
   .date-range-box {
-    padding-left: 0px;
+    font-family: 'Proxima Nova' !important;
   }
 
   /deep/ .dropdown {
