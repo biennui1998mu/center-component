@@ -24,7 +24,7 @@
             <div class="input-group-prepend">
               <b-icon-search class="custom-icon-search"></b-icon-search>
             </div>
-            <input type="text" class="form-control" style="padding-left: 40px" placeholder="Search">
+            <input v-model="search" type="text" class="form-control" style="padding-left: 40px" placeholder="Search">
           </div>
         </div>
         <div class="col-md-3 select-box">
@@ -34,7 +34,7 @@
           <div class="input-group">
             <mem-date-rank-picker ref="dateRankPicker"></mem-date-rank-picker>
             <div class="input-group-append" @click="$refs.dateRankPicker.$refs.daterange.show()">
-<!--              <img id="calendar-icon" class="custom-icon" style="display: none; right: -2px" src="../../public/img/calendar.svg" alt="">-->
+              <!--              <img id="calendar-icon" class="custom-icon" style="display: none; right: -2px" src="../../public/img/calendar.svg" alt="">-->
               <img id="calendar-icon-disable" class="custom-icon" src="../../public/img/calendar-disable.svg" alt="">
             </div>
           </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <b-table class="customer-table" :items="items" :fields="fields">
+          <b-table class="customer-table" :items="filterUser" :fields="fields">
             <template #cell(customer)="row">
               <div class="customer">
                 <div class="customer-product">
@@ -123,6 +123,7 @@ export default {
   },
   data() {
     return {
+      search: null,
       fields: [
         {
           key: 'customer',
@@ -212,8 +213,31 @@ export default {
           amount: 200
         }
       ],
+      filterUser: [],
     }
   },
+  watch: {
+    search: {
+      handler() {
+        if (!this.search || this.search.length === 0) {
+          this.filterUser = [...this.items];
+          return;
+        }
+        this.filterUser = [];
+        if (this.search && this.search.length > 0) {
+          this.items.forEach(item => {
+            const potential = item.customer.name.toUpperCase().includes(this.search.toUpperCase());
+            if (potential) {
+              this.filterUser.push(item);
+            }
+          })
+        }
+      }
+    }
+  },
+  mounted() {
+    this.filterUser = [...this.items]
+  }
 }
 </script>
 
@@ -269,6 +293,7 @@ export default {
     /deep/ .input-group {
       height: 44px;
       max-width: 360px;
+
       .form-control {
         border: 1px solid #DEDEEB;
         box-shadow: none;
