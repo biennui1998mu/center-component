@@ -121,3 +121,20 @@ export default {
   }
 }
 </style>
+<style lang="scss">
+input[type=checkbox] {
+  cursor: pointer;
+  color: #14C8B1;
+}
+
+input[type=checkbox]:after {
+  content: "";
+  background-color: #FFFFFF;
+}
+
+input[type=checkbox]:checked:after {
+  content: "\2714";
+  font-size: 8px;
+  border: 0.1px solid #14C8B1;
+}
+</style>
