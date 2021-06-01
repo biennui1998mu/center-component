@@ -1,6 +1,6 @@
 <template>
   <div class="container mem-transaction">
-    <h2 class="page-title mb-4">
+    <h2 class="page-title mb-4 mt-4">
       Subscriptions
     </h2>
     <b-row class="mb-3 mem-card">
@@ -17,9 +17,9 @@
         <h4>$34,333</h4>
       </b-col>
     </b-row>
-    <div class="custom-table">
-      <div class="row">
-        <div class="col-md-6">
+    <div class="custom-table mt-4">
+      <div class="row filter-box">
+        <div class="col-md-6 search-box">
           <div class="input-group">
             <div class="input-group-prepend">
               <b-icon-search class="custom-icon-search"></b-icon-search>
@@ -27,7 +27,7 @@
             <input type="text" class="form-control" style="padding-left: 40px" placeholder="Search">
           </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 select-box">
           <b-dropdown :text="selection.join()" menu-class="w-100" block variant="outline-primary"
                       class="w-100">
             <input v-model="search" type="text" class="form-control" placeholder="Search">
@@ -45,7 +45,7 @@
             </b-dropdown-form>
           </b-dropdown>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 date-range-box">
           <div class="input-group">
             <date-range-picker v-model="range" :options="options" :format="format" class="form-control" style="padding-right: 35px; overflow: hidden"/>
             <div class="input-group-append">
@@ -55,66 +55,69 @@
         </div>
       </div>
       <div class="row">
-        <b-table class="customer-table" hover :items="items" :fields="fields">
-          <template #cell(customer)="row">
-            <div class="customer">
-              <div class="customer-product">
-                <div class="product-label">
-                  Product:
-                </div>
-                <div v-for="(item, index) in row.value.products" :key="index" class="product-list">
-                  {{ item }}
-                </div>
-              </div>
-              <div class="customer-info">
-                <img class="customer-img" :src="row.value.img_path" alt="img"/>
-                <div class="customer-primary-info">
-                  <div class="customer-name">
-                    {{ row.value.name }}
+        <div class="col-md-12">
+          <b-table class="customer-table" :items="items" :fields="fields">
+            <template #cell(customer)="row">
+              <div class="customer">
+                <div class="customer-product">
+                  <div class="product-label">
+                    Product:
                   </div>
-                  <div class="customer-email">
-                    {{ row.value.email }}
+                  <div v-for="(item, index) in row.value.products" :key="index" class="product-list">
+                    {{ item }}
                   </div>
                 </div>
+                <div class="customer-info">
+                  <img class="customer-img" :src="row.value.img_path" alt="img"/>
+                  <div class="customer-primary-info">
+                    <div class="customer-name">
+                      {{ row.value.name }}
+                    </div>
+                    <div class="customer-email">
+                      {{ row.value.email }}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </template>
-          <template #cell(date)="row">
-            <div class="date">
-              <div class="date-start">
-                <span class="date-prefix">Started: </span> {{ row.value.start }}
+            </template>
+            <template #cell(date)="row">
+              <div class="date">
+                <div class="date-start">
+                  <span class="date-prefix">Started: </span> {{ row.value.start }}
+                </div>
+                <div class="date-end">
+                  <span v-if="row.value.end !== ''" class="date-prefix">Ended: </span>{{ row.value.end }}
+                </div>
               </div>
-              <div class="date-end">
-                <span v-if="row.value.end !== ''" class="date-prefix">Ended: </span>{{ row.value.end }}
-              </div>
-            </div>
 
-          </template>
-          <template #cell(status)="row">
-            <div class="status">
-              <span :class="row.value ? 'status-active' : 'status-inactive'">
-                {{ row.value ? 'Active' : 'Inactive' }}
-              </span>
-            </div>
-          </template>
-          <template #cell(amount)="row">
-            <span class="amount">${{ row.value }}</span>
-            <span class="amount-unit">/mo.</span>
-          </template>
-          <!-- <template #cell(menu)>
-            <b-dropdown id="dropdown-more" text="" class="m-md-2">
-              <b-dropdown-item>
-                <b-img :src="'./img/profile.svg'" alt="lefticon"></b-img> Profile
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <b-img :src="'./img/pdf.svg'" alt="lefticon"></b-img> Download Invoice
-              </b-dropdown-item>
-              <b-dropdown-item>
-                <b-img :src="'./img/refund.svg'" alt="lefticon"></b-img> Refund
-              </b-dropdown-item>
-            </b-dropdown>
-          </template> -->
-        </b-table>
+            </template>
+            <template #cell(status)="row">
+              <div class="status">
+                <span :class="row.value ? 'status-active' : 'status-inactive'">
+                  {{ row.value ? 'Active' : 'Inactive' }}
+                </span>
+              </div>
+            </template>
+            <template #cell(amount)="row">
+              <span class="amount">${{ row.value.toFixed(2) }}</span>
+              <span class="amount-unit">/mo.</span>
+            </template>
+            <template #cell(menu)>
+              <b-dropdown id="dropdown-more" text="" class="m-md-2">
+                <b-dropdown-item>
+                  <b-img :src="'./img/profile.svg'" alt="lefticon"></b-img> Profile
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <b-img :src="'./img/pdf.svg'" alt="lefticon"></b-img> Download Invoice
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <b-img :src="'./img/refund.svg'" alt="lefticon"></b-img> Refund
+                </b-dropdown-item>
+              </b-dropdown>
+            </template>
+          </b-table>
+        </div>
+
       </div>
     </div>
   </div>
@@ -130,27 +133,32 @@ export default {
       fields: [
         {
           key: 'customer',
+          label: 'CUSTOMER',
           sortable: true,
           tdClass: 'align-middle'
         },
         {
           key: 'date',
+          label: 'DATE',
           sortable: true,
           tdClass: 'align-middle'
         },
         {
           key: 'status',
+          label: 'STATUS',
           sortable: true,
           tdClass: 'align-middle'
         },
         {
           key: 'amount',
+          label: 'AMOUNT',
           sortable: true,
           tdClass: 'align-middle'
         },
         {
           key: 'menu',
-          label: ''
+          label: '',
+          tdClass: 'align-middle'
         }
       ],
       range: [moment(), moment()],
@@ -306,16 +314,25 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 .mem-transaction {
+
+  margin-top: 100px;
   max-width: 948px;
+  padding: 0;
+
   .page-title {
     font-weight: 600;
     font-size: 18px;
+    line-height: 25px;
     color: #222A3C;
   }
 
   .mem-card {
-    padding: 20px 0;
+    padding: 13px 0;
     background: #F4F4F9;
+    border: 1px solid #DEDEEB;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin: 0 1px;
 
     .col {
       border-right: 1px solid #DEDEEB;
@@ -339,79 +356,214 @@ export default {
     }
   }
 
-  .mem-dropdown {
-    max-height: 300px;
-    overflow-y: scroll;
-    margin-top: 10px;
+  .custom-table {
 
-    .b-dropdown-form {
-      padding: 0.25rem 0.5rem;
+    .filter-box {
+      margin-bottom: 10px;
+    }
+    /deep/ .input-group {
+      height: 44px;
+      max-width: 360px;
 
-      &:focus {
-        border: none;
-        outline: none !important;
+      .form-control {
+        border: 1px solid #DEDEEB;
+        box-shadow: none;
+        border-radius: 4px !important;
+        font-size: 14px;
+        line-height: 19px;
+
+        &:focus {
+          border: 1px solid rgba(0, 209, 255, 0.8) !important;
+        }
+
+        &:hover {
+          border: 1px solid rgba(0, 209, 255, 0.8);
+        }
       }
     }
-  }
 
-  .header-custom {
-    font-size: 12px;
-    line-height: 16px;
-    text-transform: uppercase;
-    color: #859DA7;
-
-    .dropdown-header {
-      padding: 10px 0;
+    .search-box {
+      padding-right: 0;
     }
-  }
 
-  /deep/ .input-group {
-    .form-control {
+    .select-box {
+      padding-right: 12px;
+    }
+
+    .date-range-box {
+      padding-left: 0px;
+    }
+    .mem-dropdown {
+      max-height: 300px;
+      overflow-y: scroll;
+      margin-top: 10px;
+
+      .b-dropdown-form {
+        padding: 0.25rem 0.5rem;
+
+        &:focus {
+          border: none;
+          outline: none !important;
+        }
+      }
+    }
+
+    .header-custom {
+      font-size: 12px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #859DA7;
+
+      .dropdown-header {
+        padding: 10px 0;
+      }
+    }
+
+    /deep/ .dropdown {
+      button {
+        height: 44px;
+      }
+    }
+
+    /deep/ .dropdown-menu {
+      padding: 10px;
+      outline: none;
+    }
+
+    /deep/ .dropdown-toggle {
+      width: 100% !important;
+      height: 38px;
+      padding-right: 25px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      border: 1px solid #ced4da;
+      color: black;
+
+      &:hover {
+        border: 1px solid rgba(0, 209, 255, 0.8);
+        background: white;
+      }
+
       &:focus {
         border: 1px solid rgba(0, 209, 255, 0.8);
         box-shadow: none;
+        background: white;
       }
     }
-  }
 
-  /deep/ .dropdown-menu {
-    padding: 10px;
-    outline: none;
-  }
-
-  /deep/ .dropdown-toggle {
-    width: 100% !important;
-    height: 38px;
-    padding-right: 25px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border: 1px solid #ced4da;
-    color: black;
-
-    &:hover {
-      border: 1px solid rgba(0, 209, 255, 0.8);
-      background: white;
+    /deep/ .custom-checkbox {
+      label {
+        font-size: 14px;
+        color: #222A3C;
+        padding-left: 10px;
+      }
     }
 
-    &:focus {
-      box-shadow: none;
+    /deep/ .dropdown-toggle::after {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      color: #859DA7;
     }
-  }
 
-  /deep/ .custom-checkbox {
-    label {
+    .customer {
       font-size: 14px;
-      color: #222A3C;
-      padding-left: 10px;
-    }
-  }
+      line-height: 19px;
 
-  /deep/ .dropdown-toggle::after {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    color: #859DA7;
+      .customer-product {
+        display: flex;
+        margin-bottom: 11px;
+        margin-top: 2px;
+
+        .product-label {
+          color: #9FA5B7;
+          margin-right: 4px;
+          font-weight: normal;
+        }
+
+        .product-list {
+          color: #222A3C;
+          font-weight: 600;
+        }
+      }
+
+      .customer-info {
+        display: flex;
+        align-items: center;
+
+        .customer-img {
+          width: 44px;
+          height: 44px;
+          margin-right: 10px;
+          margin-bottom: 10px;
+        }
+
+        .customer-primary-info {
+          margin-bottom: 10px;
+
+          .customer-name {
+            color: #222A3C;
+            font-weight: 600;
+          }
+
+          .customer-email {
+            color: #9FA5B7;
+            font-weight: normal;
+            margin-top: 1px;
+          }
+        }
+      }
+    }
+
+    .date-start, .date-end {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 19px;
+      color: #222A3C;
+      .date-prefix {
+        color: #9FA5B7;
+      }
+    }
+
+    .date-start {
+      margin-bottom: 7px;
+    }
+
+    .status {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 600;
+      border-radius: 31px;
+
+      .status-active {
+        padding: 4px 10px;
+        border-radius: 31px;
+        color: #14C8B1;
+        background: #E8FAF7;
+      }
+
+      .status-inactive {
+        padding: 4px 10px;
+        border-radius: 31px;
+        color: #EB5757;
+        background: #FDEEEE;
+      }
+    }
+
+    .amount {
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 25px;
+      color: #222A3C;
+    }
+
+    .amount-unit {
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 19px;
+      color: #9FA5B7;
+    }
   }
 }
 
@@ -436,128 +588,15 @@ export default {
 .customer-table {
   font-family: 'Open Sans';
 
-  .customer {
-    font-size: 14px;
-    line-height: 19px;
 
-    .customer-product {
-      display: flex;
-      margin-bottom: 11px;
-
-      .product-label {
-        color: #9FA5B7;
-        margin-right: 4px;
-        font-weight: normal;
-      }
-
-      .product-list {
-        color: #222A3C;
-        font-weight: 600;
-      }
-    }
-
-    .customer-info {
-      display: flex;
-      align-items: center;
-
-      .customer-img {
-        width: 44px;
-        height: 44px;
-        margin-right: 10px;
-        margin-bottom: 10px;
-      }
-
-      .customer-primary-info {
-        margin-bottom: 10px;
-
-        .customer-name {
-          color: #222A3C;
-          font-weight: 600;
-        }
-
-        .customer-email {
-          color: #9FA5B7;
-          font-weight: normal;
-          margin-top: 1px;
-        }
-      }
-    }
-  }
-
-  .date-start, .date-end {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    color: #222A3C;
-    .date-prefix {
-      color: #9FA5B7;
-    }
-  }
-
-  .date-start {
-    margin-bottom: 7px;
-  }
-
-  .status {
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 600;
-    border-radius: 31px;
-
-    .status-active {
-      padding: 4px 10px;
-      border-radius: 31px;
-      color: #14C8B1;
-      background: #E8FAF7;
-    }
-
-    .status-inactive {
-      padding: 4px 10px;
-      border-radius: 31px;
-      color: #EB5757;
-      background: #FDEEEE;
-    }
-  }
-
-  .amount {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 25px;
-    color: #222A3C;
-  }
-
-  .amount-unit {
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 19px;
-    color: #9FA5B7;
-  }
-
-  // #dropdown-more {
-  //   .btn {
-  //     padding: 1px 5px;
-  //     background: #fff;
-  //     border: none;
-  //     color: #222A3C;
-  //   }
-
-  //   .btn:hover, .btn:active {
-  //     background: #DEDEEB;
-  //     border: none;
-  //   }
-
-  //   ul {
-  //     left: unset !important;
-  //     right: -24px !important;
-  //     top: 8px !important;
-  //     border: none;
-  //     box-shadow: 0px 0px 12px 1px #dedeeb;
-  //   }
-  // }
 }
 </style>
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Proxima+Nova');
+
 .daterangepicker {
+  font-family: 'Proxima Nova' !important;
   .ranges {
     li {
       border: 1px solid #DEDEEB;
@@ -664,6 +703,63 @@ export default {
   border: 0;
 }
 
+#dropdown-more {
+
+  .btn {
+    padding: 1px 5px;
+    background: #fff0;
+    border: none;
+    color: #222A3C;
+
+    &::after {
+      width: 24px;
+      content: '\2807' !important;
+      border-top: 0 !important;
+      vertical-align: unset !important;
+      font-size: 22px;
+      font-weight: 700;
+      position: static;
+    }
+  }
+
+  .btn:hover, .btn:active {
+    background: #DEDEEB;
+    border: none;
+  }
+
+  ul {
+    left: unset !important;
+    right: -24px !important;
+    top: 8px !important;
+    border: none;
+    box-shadow: 0px 0px 12px 1px #dedeeb;
+  }
+}
+
+.customer-table {
+  thead {
+    th {
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: normal;
+      color: #9FA5B7;
+      background-image: none !important;
+      div {
+        display: inline;
+        padding-right: 13px;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' view-box='0 0 101 101' preserveAspectRatio='none'%3e%3cpath fill='black' opacity='.3' d='M51 1l25 23 24 22H1l25-22zM51 101l25-23 24-22H1l25 22z'/%3e%3c/svg%3e");
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: 8px 8px;
+      }
+      &:last-child {
+        div {
+          background-image: none !important;
+        }
+      }
+    }
+  }
+}
 </style>
 
 
